@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RIM-FINANCE - منصة التمويل الجماعي</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+</head>
+<body dir="rtl" class="no-select">
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-content">
+            <a href="/" class="logo">
+                <img src="assets/logo.png" alt="RIM-FINANCE" width="32" height="32">
+                RIM-FINANCE
+            </a>
+            
+            <div class="navbar-actions">
+                <!-- Sélecteur de langue -->
+                <div class="language-selector">
+                    <div class="nav-icon" onclick="toggleLanguageMenu()">
+                        <span>🌐</span>
+                    </div>
+                    <div id="language-menu" class="language-menu">
+                        <div class="language-option" onclick="changeLanguage('ar')">
+                            <span class="flag">🇲🇷</span>
+                            <span>العربية</span>
+                        </div>
+                        <div class="language-option" onclick="changeLanguage('fr')">
+                            <span class="flag">🇫🇷</span>
+                            <span>Français</span>
+                        </div>
+                        <div class="language-option" onclick="changeLanguage('en')">
+                            <span class="flag">🇺🇸</span>
+                            <span>English</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Notifications -->
+                <div class="nav-icon" onclick="navigateTo('notifications')">
+                    <span>🔔</span>
+                    <div class="notification-badge">3</div>
+                </div>
+                
+                <!-- Menu drawer -->
+                <div class="nav-icon" onclick="toggleDrawer()">
+                    <span>☰</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Drawer -->
+    <div id="drawer-overlay" class="drawer-overlay" onclick="closeDrawer()"></div>
+    <div id="drawer" class="drawer">
+        <div class="drawer-header">
+            <div class="logo">RIM-FINANCE</div>
+            <button class="drawer-close" onclick="closeDrawer()">×</button>
+        </div>
+        <div class="drawer-menu">
+            <a href="profile" class="drawer-item">
+                <span>👤</span>
+                <span data-translate="profile">الملف الشخصي</span>
+            </a>
+            <a href="my-contributions" class="drawer-item">
+                <span>💰</span>
+                <span data-translate="my_contributions">مساهماتي</span>
+            </a>
+            <a href="manage-projects" class="drawer-item">
+                <span>📊</span>
+                <span data-translate="manage_projects">إدارة المشاريع</span>
+            </a>
+            <a href="savings-offers" class="drawer-item">
+                <span>🏦</span>
+                <span data-translate="savings_offers">عروض الادخار</span>
+            </a>
+            <a href="faq" class="drawer-item">
+                <span>❓</span>
+                <span data-translate="faq">الأسئلة الشائعة</span>
+            </a>
+            <a href="contact" class="drawer-item">
+                <span>📞</span>
+                <span data-translate="contact">اتصل بنا</span>
+            </a>
+            <a href="news" class="drawer-item">
+                <span>📰</span>
+                <span data-translate="news">الأخبار</span>
+            </a>
+            <a href="terms" class="drawer-item">
+                <span>📋</span>
+                <span data-translate="terms">الشروط والأحكام</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Contenu principal -->
+    <main class="main-content">
+        <!-- Section héro -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title fade-in-up" data-translate="welcome_title">
+                        مرحباً بك في RIM-FINANCE
+                    </h1>
+                    <p class="hero-subtitle fade-in-up" data-translate="welcome_subtitle">
+                        منصة التمويل الجماعي الرائدة في موريتانيا
+                    </p>
+                    <div class="hero-actions fade-in-up">
+                        <a href="signup" class="btn btn-primary">
+                            <span data-translate="get_started">ابدأ الآن</span>
+                        </a>
+                        <a href="login" class="btn btn-secondary">
+                            <span data-translate="login">تسجيل الدخول</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="assets/hero-image.jpg" alt="RIM-FINANCE" class="no-select">
+                </div>
+            </div>
+        </section>
+
+        <!-- Projets en vedette -->
+        <section class="featured-projects">
+            <div class="container">
+                <h2 class="section-title" data-translate="featured_projects">مشاريع مميزة</h2>
+                <div class="projects-carousel">
+                    <div class="carousel-container">
+                        <div id="featured-projects-container" class="carousel-track">
+                            <!-- Les projets seront chargés dynamiquement -->
+                        </div>
+                        <button class="carousel-btn prev" onclick="slideCarousel('prev')">‹</button>
+                        <button class="carousel-btn next" onclick="slideCarousel('next')">›</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comment ça marche -->
+        <section class="how-it-works">
+            <div class="container">
+                <h2 class="section-title" data-translate="how_it_works">كيف يعمل</h2>
+                <div class="steps-grid">
+                    <div class="step-card animate-on-scroll">
+                        <div class="step-icon">1</div>
+                        <h3>سجل حسابك</h3>
+                        <p>أنشئ حساباً جديداً كمستثمر أو صاحب مشروع</p>
+                    </div>
+                    <div class="step-card animate-on-scroll">
+                        <div class="step-icon">2</div>
+                        <h3>اختر مشروعك</h3>
+                        <p>تصفح المشاريع المتاحة واختر ما يناسبك</p>
+                    </div>
+                    <div class="step-card animate-on-scroll">
+                        <div class="step-icon">3</div>
+                        <h3>ساهم بأمان</h3>
+                        <p>ادفع بطريقة آمنة وتابع تقدم مشروعك</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- المزيد من المشاريع -->
+        <section class="more-projects">
+            <div class="container">
+                <h2 class="section-title" data-translate="more_projects">المزيد من المشاريع</h2>
+                <div id="more-projects-container" class="projects-grid">
+                    <!-- Les projets seront chargés dynamiquement -->
+                </div>
+                <div class="text-center mt-3">
+                    <a href="projects" class="btn btn-secondary">عرض جميع المشاريع</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Navigation inférieure -->
+    <nav class="bottom-nav">
+        <a href="/" class="bottom-nav-item active">
+            <span>🏠</span>
+            <span data-translate="home">الرئيسية</span>
+        </a>
+        <a href="projects" class="bottom-nav-item">
+            <span>🔍</span>
+            <span data-translate="search">البحث</span>
+        </a>
+        <a href="contribute" class="bottom-nav-item">
+            <span>➕</span>
+            <span data-translate="contribute">المساهمة</span>
+        </a>
+        <a href="notifications" class="bottom-nav-item">
+            <span>🔔</span>
+            <span data-translate="notifications">الإشعارات</span>
+        </a>
+        <a href="profile" class="bottom-nav-item">
+            <span>👤</span>
+            <span data-translate="profile">الملف الشخصي</span>
+        </a>
+    </nav>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/home.js"></script>
+</body>
+</html>
+

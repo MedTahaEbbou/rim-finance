@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الملف الشخصي - RIM-FINANCE</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/profile.css">
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+</head>
+<body dir="rtl" class="no-select">
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-content">
+            <a href="/" class="logo">
+                <img src="assets/logo.png" alt="RIM-FINANCE" width="32" height="32">
+                RIM-FINANCE
+            </a>
+            
+            <div class="navbar-actions">
+                <!-- Sélecteur de langue -->
+                <div class="language-selector">
+                    <div class="nav-icon" onclick="toggleLanguageMenu()">
+                        <span>🌐</span>
+                    </div>
+                    <div id="language-menu" class="language-menu">
+                        <div class="language-option" onclick="changeLanguage('ar')">
+                            <span class="flag">🇲🇷</span>
+                            <span>العربية</span>
+                        </div>
+                        <div class="language-option" onclick="changeLanguage('fr')">
+                            <span class="flag">🇫🇷</span>
+                            <span>Français</span>
+                        </div>
+                        <div class="language-option" onclick="changeLanguage('en')">
+                            <span class="flag">🇺🇸</span>
+                            <span>English</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Notifications -->
+                <div class="nav-icon" onclick="navigateTo('notifications')">
+                    <span>🔔</span>
+                    <div class="notification-badge">3</div>
+                </div>
+                
+                <!-- Menu drawer -->
+                <div class="nav-icon" onclick="toggleDrawer()">
+                    <span>☰</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Drawer -->
+    <div id="drawer-overlay" class="drawer-overlay" onclick="closeDrawer()"></div>
+    <div id="drawer" class="drawer">
+        <div class="drawer-header">
+            <div class="logo">RIM-FINANCE</div>
+            <button class="drawer-close" onclick="closeDrawer()">×</button>
+        </div>
+        <div class="drawer-menu">
+            <a href="/" class="drawer-item">
+                <span>🏠</span>
+                <span data-translate="home">الرئيسية</span>
+            </a>
+            <a href="projects" class="drawer-item">
+                <span>🔍</span>
+                <span data-translate="search">البحث</span>
+            </a>
+            <a href="my-contributions" class="drawer-item">
+                <span>💰</span>
+                <span data-translate="my_contributions">مساهماتي</span>
+            </a>
+            <a href="manage-projects" class="drawer-item">
+                <span>📊</span>
+                <span data-translate="manage_projects">إدارة المشاريع</span>
+            </a>
+            <a href="savings-offers" class="drawer-item">
+                <span>🏦</span>
+                <span data-translate="savings_offers">عروض الادخار</span>
+            </a>
+            <a href="faq" class="drawer-item">
+                <span>❓</span>
+                <span data-translate="faq">الأسئلة الشائعة</span>
+            </a>
+            <a href="contact" class="drawer-item">
+                <span>📞</span>
+                <span data-translate="contact">اتصل بنا</span>
+            </a>
+            <div class="drawer-divider"></div>
+            <a href="signup" class="drawer-item" onclick="logout()">
+                <span>🚪</span>
+                <span data-translate="logout">تسجيل الخروج</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Contenu principal -->
+    <main class="profile-main">
+        <div class="container">
+            <!-- En-tête du profil -->
+            <div class="profile-header">
+                <div class="profile-cover">
+                    <img src="assets/hero-image.jpg" alt="Cover" class="cover-image no-select">
+                    <button class="edit-cover-btn" onclick="editCover()">
+                        <span>📷</span>
+                        تغيير الغلاف
+                    </button>
+                </div>
+                
+                <div class="profile-info">
+                    <div class="profile-avatar">
+                        <img src="assets/avatar-placeholder.jpg" alt="Profile" class="avatar-image no-select">
+                        <button class="edit-avatar-btn" onclick="editAvatar()">
+                            <span>📷</span>
+                        </button>
+                    </div>
+                    
+                    <div class="profile-details">
+                        <h1 class="profile-name" id="profile-name">محمد طه أبو</h1>
+                        <p class="profile-type" id="profile-type">مستثمر</p>
+                        <p class="profile-location">نواكشوط، موريتانيا</p>
+                        <p class="profile-joined">انضم في يناير 2024</p>
+                    </div>
+                    
+                    <div class="profile-actions">
+                        <button class="btn btn-primary" onclick="editProfile()">
+                            <span>✏️</span>
+                            تعديل الملف الشخصي
+                        </button>
+                        <button class="btn btn-secondary" onclick="shareProfile()">
+                            <span>📤</span>
+                            مشاركة
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statistiques du profil -->
+            <div class="profile-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">💰</div>
+                    <div class="stat-content">
+                        <div class="stat-number">850,000</div>
+                        <div class="stat-label">إجمالي الاستثمارات</div>
+                        <div class="stat-unit">أ.م.</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📊</div>
+                    <div class="stat-content">
+                        <div class="stat-number">12</div>
+                        <div class="stat-label">المشاريع المدعومة</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🎯</div>
+                    <div class="stat-content">
+                        <div class="stat-number">89%</div>
+                        <div class="stat-label">معدل النجاح</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⭐</div>
+                    <div class="stat-content">
+                        <div class="stat-number">4.8</div>
+                        <div class="stat-label">التقييم</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Onglets du profil -->
+            <div class="profile-tabs">
+                <button class="profile-tab active" onclick="switchProfileTab('overview')" data-translate="overview">
+                    نظرة عامة
+                </button>
+                <button class="profile-tab" onclick="switchProfileTab('investments')" data-translate="investments">
+                    الاستثمارات
+                </button>
+                <button class="profile-tab" onclick="switchProfileTab('projects')" data-translate="my_projects">
+                    مشاريعي
+                </button>
+                <button class="profile-tab" onclick="switchProfileTab('activity')" data-translate="activity">
+                    النشاط
+                </button>
+                <button class="profile-tab" onclick="switchProfileTab('settings')" data-translate="settings">
+                    الإعدادات
+                </button>
+            </div>
+
+            <!-- Contenu des onglets -->
+            <div class="profile-content">
+                <!-- Onglet Aperçu -->
+                <div id="overview-tab" class="tab-content active">
+                    <div class="overview-grid">
+                        <!-- Activité récente -->
+                        <div class="overview-section">
+                            <h3 class="section-title">النشاط الأخير</h3>
+                            <div class="activity-list">
+                                <div class="activity-item">
+                                    <div class="activity-icon">💰</div>
+                                    <div class="activity-content">
+                                        <p class="activity-text">استثمرت 50,000 أ.م. في مشروع الطاقة الشمسية</p>
+                                        <span class="activity-time">منذ ساعتين</span>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-icon">🎉</div>
+                                    <div class="activity-content">
+                                        <p class="activity-text">تم تمويل مشروع التجارة الإلكترونية بنجاح</p>
+                                        <span class="activity-time">أمس</span>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-icon">⭐</div>
+                                    <div class="activity-content">
+                                        <p class="activity-text">حصلت على تقييم 5 نجوم من مشروع الزراعة</p>
+                                        <span class="activity-time">منذ 3 أيام</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- المشاريع المفضلة -->
+                        <div class="overview-section">
+                            <h3 class="section-title">المشاريع المفضلة</h3>
+                            <div class="favorite-projects">
+                                <div class="mini-project-card">
+                                    <img src="assets/project1.jpg" alt="Project" class="mini-project-image no-select">
+                                    <div class="mini-project-content">
+                                        <h4>مشروع الطاقة الشمسية</h4>
+                                        <p>85% مكتمل</p>
+                                    </div>
+                                </div>
+                                <div class="mini-project-card">
+                                    <img src="assets/project2.jpg" alt="Project" class="mini-project-image no-select">
+                                    <div class="mini-project-content">
+                                        <h4>مشروع تربية الماشية</h4>
+                                        <p>60% مكتمل</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- الإنجازات -->
+                        <div class="overview-section">
+                            <h3 class="section-title">الإنجازات</h3>
+                            <div class="achievements">
+                                <div class="achievement-badge">
+                                    <div class="achievement-icon">🏆</div>
+                                    <div class="achievement-text">
+                                        <h4>مستثمر ذهبي</h4>
+                                        <p>استثمر أكثر من 500,000 أ.م.</p>
+                                    </div>
+                                </div>
+                                <div class="achievement-badge">
+                                    <div class="achievement-icon">🎯</div>
+                                    <div class="achievement-text">
+                                        <h4>داعم موثوق</h4>
+                                        <p>دعم 10+ مشاريع ناجحة</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Onglet Investissements -->
+                <div id="investments-tab" class="tab-content">
+                    <div class="investments-header">
+                        <h3>استثماراتي</h3>
+                        <div class="investments-filters">
+                            <select class="filter-select">
+                                <option>جميع الاستثمارات</option>
+                                <option>نشطة</option>
+                                <option>مكتملة</option>
+                                <option>ملغاة</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="investments-list">
+                        <div class="investment-item">
+                            <div class="investment-project">
+                                <img src="assets/project1.jpg" alt="Project" class="investment-image no-select">
+                                <div class="investment-details">
+                                    <h4>مشروع الطاقة الشمسية</h4>
+                                    <p>تركيب ألواح شمسية للمناطق النائية</p>
+                                    <span class="investment-date">15 يناير 2024</span>
+                                </div>
+                            </div>
+                            <div class="investment-amount">
+                                <span class="amount">50,000 أ.م.</span>
+                                <span class="status active">نشط</span>
+                            </div>
+                            <div class="investment-return">
+                                <span class="return-rate">+12%</span>
+                                <span class="return-amount">+6,000 أ.م.</span>
+                            </div>
+                        </div>
+                        
+                        <div class="investment-item">
+                            <div class="investment-project">
+                                <img src="assets/project3.jpg" alt="Project" class="investment-image no-select">
+                                <div class="investment-details">
+                                    <h4>مشروع التجارة الإلكترونية</h4>
+                                    <p>منصة تجارة إلكترونية محلية</p>
+                                    <span class="investment-date">10 يناير 2024</span>
+                                </div>
+                            </div>
+                            <div class="investment-amount">
+                                <span class="amount">75,000 أ.م.</span>
+                                <span class="status completed">مكتمل</span>
+                            </div>
+                            <div class="investment-return">
+                                <span class="return-rate">+18%</span>
+                                <span class="return-amount">+13,500 أ.م.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Onglet Projets -->
+                <div id="projects-tab" class="tab-content">
+                    <div class="projects-header">
+                        <h3>مشاريعي</h3>
+                        <button class="btn btn-primary" onclick="navigateTo('create-project')">
+                            <span>➕</span>
+                            إنشاء مشروع جديد
+                        </button>
+                    </div>
+                    
+                    <div class="user-projects-list">
+                        <div class="empty-state">
+                            <div class="empty-icon">📋</div>
+                            <h4>لا توجد مشاريع بعد</h4>
+                            <p>ابدأ بإنشاء مشروعك الأول واحصل على التمويل اللازم</p>
+                            <button class="btn btn-primary" onclick="navigateTo('create-project')">
+                                إنشاء مشروع
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Onglet Activité -->
+                <div id="activity-tab" class="tab-content">
+                    <div class="activity-header">
+                        <h3>سجل النشاط</h3>
+                        <div class="activity-filters">
+                            <select class="filter-select">
+                                <option>جميع الأنشطة</option>
+                                <option>الاستثمارات</option>
+                                <option>المشاريع</option>
+                                <option>التقييمات</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="activity-timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">اليوم</div>
+                            <div class="timeline-content">
+                                <div class="activity-item">
+                                    <div class="activity-icon">💰</div>
+                                    <div class="activity-content">
+                                        <p class="activity-text">استثمرت 50,000 أ.م. في مشروع الطاقة الشمسية</p>
+                                        <span class="activity-time">14:30</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-date">أمس</div>
+                            <div class="timeline-content">
+                                <div class="activity-item">
+                                    <div class="activity-icon">🎉</div>
+                                    <div class="activity-content">
+                                        <p class="activity-text">تم تمويل مشروع التجارة الإلكترونية بنجاح</p>
+                                        <span class="activity-time">09:15</span>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-icon">⭐</div>
+                                    <div class="activity-content">
+                                        <p class="activity-text">قيمت مشروع الزراعة بـ 5 نجوم</p>
+                                        <span class="activity-time">16:45</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Onglet Paramètres -->
+                <div id="settings-tab" class="tab-content">
+                    <div class="settings-sections">
+                        <div class="settings-section">
+                            <h3>المعلومات الشخصية</h3>
+                            <form class="settings-form">
+                                <div class="form-group">
+                                    <label class="form-label">الاسم الكامل</label>
+                                    <input type="text" class="form-input" value="محمد طه أبو">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">رقم الهاتف</label>
+                                    <input type="tel" class="form-input" value="44508860">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">الموقع</label>
+                                    <input type="text" class="form-input" value="نواكشوط، موريتانيا">
+                                </div>
+                                <button type="submit" class="btn btn-primary">حفظ التغييرات</button>
+                            </form>
+                        </div>
+                        
+                        <div class="settings-section">
+                            <h3>إعدادات الإشعارات</h3>
+                            <div class="notification-settings">
+                                <div class="setting-item">
+                                    <label class="setting-label">
+                                        <input type="checkbox" checked>
+                                        <span class="checkmark"></span>
+                                        إشعارات المشاريع الجديدة
+                                    </label>
+                                </div>
+                                <div class="setting-item">
+                                    <label class="setting-label">
+                                        <input type="checkbox" checked>
+                                        <span class="checkmark"></span>
+                                        تحديثات الاستثمارات
+                                    </label>
+                                </div>
+                                <div class="setting-item">
+                                    <label class="setting-label">
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                        النشرة الإخبارية
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="settings-section">
+                            <h3>الأمان</h3>
+                            <div class="security-settings">
+                                <button class="btn btn-secondary">تغيير كلمة المرور</button>
+                                <button class="btn btn-secondary">تفعيل المصادقة الثنائية</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Navigation inférieure -->
+    <nav class="bottom-nav">
+        <a href="/" class="bottom-nav-item">
+            <span>🏠</span>
+            <span data-translate="home">الرئيسية</span>
+        </a>
+        <a href="projects" class="bottom-nav-item">
+            <span>🔍</span>
+            <span data-translate="search">البحث</span>
+        </a>
+        <a href="contribute" class="bottom-nav-item">
+            <span>➕</span>
+            <span data-translate="contribute">المساهمة</span>
+        </a>
+        <a href="notifications" class="bottom-nav-item">
+            <span>🔔</span>
+            <span data-translate="notifications">الإشعارات</span>
+        </a>
+        <a href="profile" class="bottom-nav-item active">
+            <span>👤</span>
+            <span data-translate="profile">الملف الشخصي</span>
+        </a>
+    </nav>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/profile.js"></script>
+</body>
+</html>
+

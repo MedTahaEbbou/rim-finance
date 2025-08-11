@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الإشعارات - RIM-FINANCE</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/notifications.css">
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+</head>
+<body dir="rtl" class="no-select">
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-content">
+            <a href="/" class="logo">
+                <img src="assets/logo.png" alt="RIM-FINANCE" width="32" height="32">
+                RIM-FINANCE
+            </a>
+            
+            <div class="navbar-actions">
+                <!-- Sélecteur de langue -->
+                <div class="language-selector">
+                    <div class="nav-icon" onclick="toggleLanguageMenu()">
+                        <span>🌐</span>
+                    </div>
+                    <div id="language-menu" class="language-menu">
+                        <div class="language-option" onclick="changeLanguage('ar')">
+                            <span class="flag">🇲🇷</span>
+                            <span>العربية</span>
+                        </div>
+                        <div class="language-option" onclick="changeLanguage('fr')">
+                            <span class="flag">🇫🇷</span>
+                            <span>Français</span>
+                        </div>
+                        <div class="language-option" onclick="changeLanguage('en')">
+                            <span class="flag">🇺🇸</span>
+                            <span>English</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Notifications actives -->
+                <div class="nav-icon active" onclick="toggleNotificationPanel()">
+                    <span>🔔</span>
+                    <div class="notification-badge">3</div>
+                </div>
+                
+                <!-- Menu drawer -->
+                <div class="nav-icon" onclick="toggleDrawer()">
+                    <span>☰</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Drawer -->
+    <div id="drawer-overlay" class="drawer-overlay" onclick="closeDrawer()"></div>
+    <div id="drawer" class="drawer">
+        <div class="drawer-header">
+            <div class="logo">RIM-FINANCE</div>
+            <button class="drawer-close" onclick="closeDrawer()">×</button>
+        </div>
+        <div class="drawer-menu">
+            <a href="/" class="drawer-item">
+                <span>🏠</span>
+                <span data-translate="home">الرئيسية</span>
+            </a>
+            <a href="projects" class="drawer-item">
+                <span>🔍</span>
+                <span data-translate="search">البحث</span>
+            </a>
+            <a href="profile" class="drawer-item">
+                <span>👤</span>
+                <span data-translate="profile">الملف الشخصي</span>
+            </a>
+            <a href="my-contributions" class="drawer-item">
+                <span>💰</span>
+                <span data-translate="my_contributions">مساهماتي</span>
+            </a>
+            <a href="manage-projects" class="drawer-item">
+                <span>📊</span>
+                <span data-translate="manage_projects">إدارة المشاريع</span>
+            </a>
+            <a href="contribute" class="drawer-item">
+                <span>➕</span>
+                <span data-translate="contribute">إضافة مشروع</span>
+            </a>
+            <a href="savings-offers" class="drawer-item">
+                <span>🏦</span>
+                <span data-translate="savings_offers">عروض الادخار</span>
+            </a>
+            <a href="faq" class="drawer-item">
+                <span>❓</span>
+                <span data-translate="faq">الأسئلة الشائعة</span>
+            </a>
+            <a href="contact" class="drawer-item">
+                <span>📞</span>
+                <span data-translate="contact">اتصل بنا</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Contenu principal -->
+    <main class="notifications-main">
+        <div class="container">
+            <!-- En-tête -->
+            <div class="notifications-header">
+                <div class="breadcrumb">
+                    <a href="/" class="breadcrumb-item">الرئيسية</a>
+                    <span class="breadcrumb-separator">›</span>
+                    <span class="breadcrumb-item active">الإشعارات</span>
+                </div>
+                
+                <div class="header-content">
+                    <div class="header-info">
+                        <h1 class="page-title">الإشعارات</h1>
+                        <p class="page-subtitle">تابع آخر التحديثات والأخبار المهمة</p>
+                    </div>
+                    
+                    <div class="header-actions">
+                        <button class="btn btn-secondary" onclick="markAllAsRead()">
+                            <span>✓</span>
+                            تحديد الكل كمقروء
+                        </button>
+                        <button class="btn btn-secondary" onclick="toggleNotificationSettings()">
+                            <span>⚙️</span>
+                            الإعدادات
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filtres de notifications -->
+            <div class="notification-filters">
+                <button class="filter-btn active" onclick="filterNotifications('all')" data-translate="all">
+                    الكل
+                    <span class="filter-count" id="count-all">12</span>
+                </button>
+                <button class="filter-btn" onclick="filterNotifications('unread')" data-translate="unread">
+                    غير مقروءة
+                    <span class="filter-count" id="count-unread">3</span>
+                </button>
+                <button class="filter-btn" onclick="filterNotifications('projects')" data-translate="projects">
+                    المشاريع
+                    <span class="filter-count" id="count-projects">5</span>
+                </button>
+                <button class="filter-btn" onclick="filterNotifications('payments')" data-translate="payments">
+                    المدفوعات
+                    <span class="filter-count" id="count-payments">2</span>
+                </button>
+                <button class="filter-btn" onclick="filterNotifications('system')" data-translate="system">
+                    النظام
+                    <span class="filter-count" id="count-system">2</span>
+                </button>
+            </div>
+
+            <!-- Liste des notifications -->
+            <div class="notifications-list">
+                <!-- Notification 1: Nouveau projet financé -->
+                <div class="notification-item unread" data-category="projects" data-id="1">
+                    <div class="notification-icon success">
+                        <span>🎉</span>
+                    </div>
+                    <div class="notification-content">
+                        <div class="notification-header">
+                            <h3 class="notification-title">تم تمويل مشروعك بنجاح!</h3>
+                            <div class="notification-meta">
+                                <span class="notification-time">منذ ساعتين</span>
+                                <div class="notification-status unread-indicator"></div>
+                            </div>
+                        </div>
+                        <p class="notification-message">
+                            مبروك! تم الوصول إلى هدف التمويل لمشروع "الطاقة الشمسية للمناطق النائية" بنسبة 100%. 
+                            سيتم تحويل الأموال إلى حسابك خلال 3-5 أيام عمل.
+                        </p>
+                        <div class="notification-actions">
+                            <button class="btn-link" onclick="viewProject(1)">عرض المشروع</button>
+                            <button class="btn-link" onclick="viewFunding(1)">تفاصيل التمويل</button>
+                        </div>
+                    </div>
+                    <div class="notification-controls">
+                        <button class="control-btn" onclick="markAsRead(1)" title="تحديد كمقروء">
+                            <span>✓</span>
+                        </button>
+                        <button class="control-btn" onclick="deleteNotification(1)" title="حذف">
+                            <span>🗑️</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Notification 2: Nouveau contributeur -->
+                <div class="notification-item unread" data-category="projects" data-id="2">
+                    <div class="notification-icon info">
+                        <span>👤</span>
+                    </div>
+                    <div class="notification-content">
+                        <div class="notification-header">
+                            <h3 class="notification-title">مساهم جديد في مشروعك</h3>
+                            <div class="notification-meta">
+                                <span class="notification-time">منذ 4 ساعات</span>
+                                <div class="notification-status unread-indicator"></div>
+                            </div>
+                        </div>
+                        <p class="notification-message">
+                            انضم أحمد محمد إلى مشروع "تربية الماشية الحديثة" بمساهمة قدرها 25,000 أوقية موريتانية.
+                            إجمالي التمويل الحالي: 625,000 أ.م. (83% من الهدف)
+                        </p>
+                        <div class="notification-actions">
+                            <button class="btn-link" onclick="viewContributor(2)">عرض المساهم</button>
+                            <button class="btn-link" onclick="sendThankYou(2)">إرسال شكر</button>
+                        </div>
+                    </div>
+                    <div class="notification-controls">
+                        <button class="control-btn" onclick="markAsRead(2)" title="تحديد كمقروء">
+                            <span>✓</span>
+                        </button>
+                        <button class="control-btn" onclick="deleteNotification(2)" title="حذف">
+                            <span>🗑️</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Notification 3: Paiement reçu -->
+                <div class="notification-item unread" data-category="payments" data-id="3">
+                    <div class="notification-icon success">
+                        <span>💰</span>
+                    </div>
+                    <div class="notification-content">
+                        <div class="notification-header">
+                            <h3 class="notification-title">تم استلام دفعة جديدة</h3>
+                            <div class="notification-meta">
+                                <span class="notification-time">منذ 6 ساعات</span>
+                                <div class="notification-status unread-indicator"></div>
+                            </div>
+                        </div>
+                        <p class="notification-message">
+                            تم إيداع مبلغ 15,000 أوقية موريتانية في حسابك من مساهمة في مشروع "التجارة الإلكترونية المحلية".
+                            الرصيد الحالي: 245,000 أ.م.
+                        </p>
+                        <div class="notification-actions">
+                            <button class="btn-link" onclick="viewTransaction(3)">عرض المعاملة</button>
+                            <button class="btn-link" onclick="viewBalance()">عرض الرصيد</button>
+                        </div>
+                    </div>
+                    <div class="notification-controls">
+                        <button class="control-btn" onclick="markAsRead(3)" title="تحديد كمقروء">
+                            <span>✓</span>
+                        </button>
+                        <button class="control-btn" onclick="deleteNotification(3)" title="حذف">
+                            <span>🗑️</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Notification 4: Mise à jour de projet -->
+                <div class="notification-item read" data-category="projects" data-id="4">
+                    <div class="notification-icon info">
+                        <span>📝</span>
+                    </div>
+                    <div class="notification-content">
+                        <div class="notification-header">
+                            <h3 class="notification-title">تحديث جديد على مشروع تساهم فيه</h3>
+                            <div class="notification-meta">
+                                <span class="notification-time">أمس</span>
+                            </div>
+                        </div>
+                        <p class="notification-message">
+                            نشر صاحب مشروع "الزراعة المائية الحديثة" تحديثاً جديداً حول تقدم العمل. 
+                            تم الانتهاء من 60% من المرحلة الأولى.
+                        </p>
+                        <div class="notification-actions">
+                            <button class="btn-link" onclick="viewUpdate(4)">قراءة التحديث</button>
+                            <button class="btn-link" onclick="viewProject(4)">عرض المشروع</button>
+                        </div>
+                    </div>
+                    <div class="notification-controls">
+                        <button class="control-btn" onclick="deleteNotification(4)" title="حذف">
+                            <span>🗑️</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Notification 5: Rappel de récompense -->
+                <div class="notification-item read" data-category="projects" data-id="5">
+                    <div class="notification-icon warning">
+                        <span>⏰</span>
+                    </div>
+                    <div class="notification-content">
+                        <div class="notification-header">
+                            <h3 class="notification-title">تذكير: موعد تسليم المكافآت</h3>
+                            <div class="notification-meta">
+                                <span class="notification-time">أمس</span>
+                            </div>
+                        </div>
+                        <p class="notification-message">
+                            يقترب موعد تسليم المكافآت لمشروع "الصناعات التقليدية". 
+                            المطلوب تسليم 45 مكافأة خلال الأسبوعين القادمين.
+                        </p>
+                        <div class="notification-actions">
+                            <button class="btn-link" onclick="viewRewards(5)">عرض المكافآت</button>
+                            <button class="btn-link" onclick="updateDelivery(5)">تحديث التسليم</button>
+                        </div>
+                    </div>
+                    <div class="notification-controls">
+                        <button class="control-btn" onclick="deleteNotification(5)" title="حذف">
+                            <span>🗑️</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Notification 6: Message système -->
+                <div class="notification-item read" data-category="system" data-id="6">
+                    <div class="notification-icon info">
+                        <span>🔧</span>
+                    </div>
+                    <div class="notification-content">
+                        <div class="notification-header">
+                            <h3 class="notification-title">صيانة مجدولة للنظام</h3>
+                            <div class="notification-meta">
+                                <span class="notification-time">منذ يومين</span>
+                            </div>
+                        </div>
+                        <p class="notification-message">
+                            ستتم صيانة دورية للنظام يوم الجمعة من الساعة 2:00 إلى 4:00 صباحاً. 
+                            قد تواجه انقطاعاً مؤقتاً في الخدمة خلال هذه الفترة.
+                        </p>
+                        <div class="notification-actions">
+                            <button class="btn-link" onclick="viewMaintenanceDetails(6)">تفاصيل الصيانة</button>
+                        </div>
+                    </div>
+                    <div class="notification-controls">
+                        <button class="control-btn" onclick="deleteNotification(6)" title="حذف">
+                            <span>🗑️</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Notification 7: Nouveau message -->
+                <div class="notification-item read" data-category="projects" data-id="7">
+                    <div class="notification-icon info">
+                        <span>💬</span>
+                    </div>
+                    <div class="notification-content">
+                        <div class="notification-header">
+                            <h3 class="notification-title">رسالة جديدة من مساهم</h3>
+                            <div class="notification-meta">
+                                <span class="notification-time">منذ 3 أيام</span>
+                            </div>
+                        </div>
+                        <p class="notification-message">
+                            أرسل لك فاطمة أحمد رسالة حول مشروع "التعليم الرقمي". 
+                            "أتطلع لرؤية المزيد من التقدم في هذا المشروع الرائع."
+                        </p>
+                        <div class="notification-actions">
+                            <button class="btn-link" onclick="viewMessage(7)">قراءة الرسالة</button>
+                            <button class="btn-link" onclick="replyMessage(7)">الرد</button>
+                        </div>
+                    </div>
+                    <div class="notification-controls">
+                        <button class="control-btn" onclick="deleteNotification(7)" title="حذف">
+                            <span>🗑️</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Notification 8: Paiement traité -->
+                <div class="notification-item read" data-category="payments" data-id="8">
+                    <div class="notification-icon success">
+                        <span>✅</span>
+                    </div>
+                    <div class="notification-content">
+                        <div class="notification-header">
+                            <h3 class="notification-title">تم معالجة طلب السحب</h3>
+                            <div class="notification-meta">
+                                <span class="notification-time">منذ 4 أيام</span>
+                            </div>
+                        </div>
+                        <p class="notification-message">
+                            تم معالجة طلب سحب بقيمة 50,000 أوقية موريتانية بنجاح. 
+                            ستصل الأموال إلى حسابك البنكي خلال 2-3 أيام عمل.
+                        </p>
+                        <div class="notification-actions">
+                            <button class="btn-link" onclick="viewWithdrawal(8)">تفاصيل السحب</button>
+                        </div>
+                    </div>
+                    <div class="notification-controls">
+                        <button class="control-btn" onclick="deleteNotification(8)" title="حذف">
+                            <span>🗑️</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Notification 9: Nouveau follower -->
+                <div class="notification-item read" data-category="system" data-id="9">
+                    <div class="notification-icon info">
+                        <span>👥</span>
+                    </div>
+                    <div class="notification-content">
+                        <div class="notification-header">
+                            <h3 class="notification-title">متابع جديد</h3>
+                            <div class="notification-meta">
+                                <span class="notification-time">منذ أسبوع</span>
+                            </div>
+                        </div>
+                        <p class="notification-message">
+                            بدأ محمد الأمين في متابعة مشاريعك. سيتلقى إشعارات حول مشاريعك الجديدة والتحديثات.
+                        </p>
+                        <div class="notification-actions">
+                            <button class="btn-link" onclick="viewFollower(9)">عرض الملف الشخصي</button>
+                        </div>
+                    </div>
+                    <div class="notification-controls">
+                        <button class="control-btn" onclick="deleteNotification(9)" title="حذف">
+                            <span>🗑️</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Message si aucune notification -->
+            <div class="empty-state" id="empty-notifications" style="display: none;">
+                <div class="empty-icon">🔔</div>
+                <h3>لا توجد إشعارات</h3>
+                <p>ستظهر هنا جميع الإشعارات والتحديثات المهمة</p>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <button class="pagination-btn" onclick="loadMoreNotifications()">
+                    <span>📄</span>
+                    تحميل المزيد
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Panneau des paramètres de notifications -->
+    <div class="notification-settings-panel" id="settings-panel">
+        <div class="settings-header">
+            <h3>إعدادات الإشعارات</h3>
+            <button class="close-btn" onclick="toggleNotificationSettings()">×</button>
+        </div>
+        
+        <div class="settings-content">
+            <div class="settings-section">
+                <h4>إشعارات المشاريع</h4>
+                <div class="setting-item">
+                    <label class="switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                    </label>
+                    <div class="setting-info">
+                        <div class="setting-title">مساهمات جديدة</div>
+                        <div class="setting-description">عند وصول مساهمة جديدة لمشاريعك</div>
+                    </div>
+                </div>
+                
+                <div class="setting-item">
+                    <label class="switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                    </label>
+                    <div class="setting-info">
+                        <div class="setting-title">تحديثات المشاريع</div>
+                        <div class="setting-description">عند نشر تحديثات على المشاريع التي تساهم فيها</div>
+                    </div>
+                </div>
+                
+                <div class="setting-item">
+                    <label class="switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                    </label>
+                    <div class="setting-info">
+                        <div class="setting-title">اكتمال التمويل</div>
+                        <div class="setting-description">عند وصول المشاريع لهدف التمويل</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="settings-section">
+                <h4>إشعارات المدفوعات</h4>
+                <div class="setting-item">
+                    <label class="switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                    </label>
+                    <div class="setting-info">
+                        <div class="setting-title">المدفوعات الواردة</div>
+                        <div class="setting-description">عند استلام مدفوعات جديدة</div>
+                    </div>
+                </div>
+                
+                <div class="setting-item">
+                    <label class="switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                    </label>
+                    <div class="setting-info">
+                        <div class="setting-title">عمليات السحب</div>
+                        <div class="setting-description">تأكيدات ومعالجة طلبات السحب</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="settings-section">
+                <h4>إشعارات النظام</h4>
+                <div class="setting-item">
+                    <label class="switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                    </label>
+                    <div class="setting-info">
+                        <div class="setting-title">تحديثات النظام</div>
+                        <div class="setting-description">إشعارات الصيانة والتحديثات</div>
+                    </div>
+                </div>
+                
+                <div class="setting-item">
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </label>
+                    <div class="setting-info">
+                        <div class="setting-title">النشرة الإخبارية</div>
+                        <div class="setting-description">أخبار ونصائح حول الاستثمار الجماعي</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="settings-section">
+                <h4>طريقة التسليم</h4>
+                <div class="delivery-options">
+                    <label class="radio-option">
+                        <input type="radio" name="delivery" value="web" checked>
+                        <span class="radio-mark"></span>
+                        <span>إشعارات الموقع فقط</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="delivery" value="email">
+                        <span class="radio-mark"></span>
+                        <span>البريد الإلكتروني + الموقع</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="delivery" value="sms">
+                        <span class="radio-mark"></span>
+                        <span>رسائل نصية + الموقع</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="settings-footer">
+            <button class="btn btn-primary" onclick="saveNotificationSettings()">
+                <span>💾</span>
+                حفظ الإعدادات
+            </button>
+        </div>
+    </div>
+
+    <!-- Overlay pour le panneau des paramètres -->
+    <div class="settings-overlay" id="settings-overlay" onclick="toggleNotificationSettings()"></div>
+
+    <!-- Navigation inférieure -->
+    <nav class="bottom-nav">
+        <a href="/" class="bottom-nav-item">
+            <span>🏠</span>
+            <span data-translate="home">الرئيسية</span>
+        </a>
+        <a href="projects" class="bottom-nav-item">
+            <span>🔍</span>
+            <span data-translate="search">البحث</span>
+        </a>
+        <a href="contribute" class="bottom-nav-item">
+            <span>➕</span>
+            <span data-translate="contribute">المساهمة</span>
+        </a>
+        <a href="notifications" class="bottom-nav-item active">
+            <span>🔔</span>
+            <span data-translate="notifications">الإشعارات</span>
+        </a>
+        <a href="profile" class="bottom-nav-item">
+            <span>👤</span>
+            <span data-translate="profile">الملف الشخصي</span>
+        </a>
+    </nav>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/notifications.js"></script>
+</body>
+</html>
+

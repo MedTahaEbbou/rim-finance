@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الأسئلة الشائعة - RIM-FINANCE</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/faq.css">
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+</head>
+<body dir="rtl" class="no-select">
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-content">
+            <a href="/" class="logo">
+                <img src="assets/logo.png" alt="RIM-FINANCE" width="32" height="32">
+                RIM-FINANCE
+            </a>
+            
+            <div class="navbar-actions">
+                <!-- Sélecteur de langue -->
+                <div class="language-selector">
+                    <div class="nav-icon" onclick="toggleLanguageMenu()">
+                        <span>🌐</span>
+                    </div>
+                    <div id="language-menu" class="language-menu">
+                        <div class="language-option" onclick="changeLanguage('ar')">
+                            <span class="flag">🇲🇷</span>
+                            <span>العربية</span>
+                        </div>
+                        <div class="language-option" onclick="changeLanguage('fr')">
+                            <span class="flag">🇫🇷</span>
+                            <span>Français</span>
+                        </div>
+                        <div class="language-option" onclick="changeLanguage('en')">
+                            <span class="flag">🇺🇸</span>
+                            <span>English</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Notifications -->
+                <div class="nav-icon" onclick="navigateTo('notifications')">
+                    <span>🔔</span>
+                    <div class="notification-badge">3</div>
+                </div>
+                
+                <!-- Menu drawer -->
+                <div class="nav-icon" onclick="toggleDrawer()">
+                    <span>☰</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Drawer -->
+    <div id="drawer-overlay" class="drawer-overlay" onclick="closeDrawer()"></div>
+    <div id="drawer" class="drawer">
+        <div class="drawer-header">
+            <div class="logo">RIM-FINANCE</div>
+            <button class="drawer-close" onclick="closeDrawer()">×</button>
+        </div>
+        <div class="drawer-menu">
+            <a href="/" class="drawer-item">
+                <span>🏠</span>
+                <span data-translate="home">الرئيسية</span>
+            </a>
+            <a href="projects" class="drawer-item">
+                <span>🔍</span>
+                <span data-translate="search">البحث</span>
+            </a>
+            <a href="profile" class="drawer-item">
+                <span>👤</span>
+                <span data-translate="profile">الملف الشخصي</span>
+            </a>
+            <a href="my-contributions" class="drawer-item">
+                <span>💰</span>
+                <span data-translate="my_contributions">مساهماتي</span>
+            </a>
+            <a href="manage-projects" class="drawer-item">
+                <span>📊</span>
+                <span data-translate="manage_projects">إدارة المشاريع</span>
+            </a>
+            <a href="savings-offers" class="drawer-item">
+                <span>🏦</span>
+                <span data-translate="savings_offers">عروض الادخار</span>
+            </a>
+            <a href="contact" class="drawer-item">
+                <span>📞</span>
+                <span data-translate="contact">اتصل بنا</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Contenu principal -->
+    <main class="faq-main">
+        <div class="container">
+            <!-- En-tête -->
+            <div class="faq-header">
+                <h1 class="page-title">الأسئلة الشائعة</h1>
+                <p class="page-subtitle">نجيب على أهم الأسئلة حول منصة RIM-FINANCE والاستثمار الجماعي</p>
+                
+                <!-- Barre de recherche -->
+                <div class="search-container">
+                    <div class="search-box">
+                        <input type="text" id="faq-search" placeholder="ابحث في الأسئلة الشائعة..." class="search-input">
+                        <button class="search-btn" onclick="searchFAQ()">
+                            <span>🔍</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Catégories -->
+            <div class="faq-categories">
+                <button class="category-btn active" onclick="filterFAQ('all')" data-translate="all">
+                    الكل
+                </button>
+                <button class="category-btn" onclick="filterFAQ('platform')" data-translate="platform">
+                    المنصة
+                </button>
+                <button class="category-btn" onclick="filterFAQ('investment')" data-translate="investment">
+                    الاستثمار
+                </button>
+                <button class="category-btn" onclick="filterFAQ('payment')" data-translate="payment">
+                    الدفع
+                </button>
+                <button class="category-btn" onclick="filterFAQ('security')" data-translate="security">
+                    الأمان
+                </button>
+                <button class="category-btn" onclick="filterFAQ('legal')" data-translate="legal">
+                    القانونية
+                </button>
+            </div>
+
+            <!-- Questions et réponses -->
+            <div class="faq-content">
+                <!-- Catégorie: Plateforme -->
+                <div class="faq-item" data-category="platform">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>ما هي منصة RIM-FINANCE؟</h3>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>RIM-FINANCE هي منصة تمويل جماعي موريتانية تهدف إلى ربط المستثمرين بأصحاب المشاريع الواعدة. نوفر بيئة آمنة وشفافة للاستثمار في مختلف القطاعات مثل الطاقة المتجددة، الزراعة، التكنولوجيا، والصناعات التقليدية.</p>
+                        <p>تأسست المنصة لدعم الاقتصاد المحلي وتوفير فرص استثمارية متنوعة للمواطنين الموريتانيين والمقيمين.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="platform">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>كيف يمكنني التسجيل في المنصة؟</h3>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>التسجيل في منصة RIM-FINANCE سهل وسريع:</p>
+                        <ol>
+                            <li>انقر على زر "التسجيل" في الصفحة الرئيسية</li>
+                            <li>اختر نوع الحساب (مستثمر أو صاحب مشروع)</li>
+                            <li>أدخل معلوماتك الشخصية (الاسم، رقم الهاتف، كلمة المرور)</li>
+                            <li>وافق على الشروط والأحكام</li>
+                            <li>تحقق من رقم هاتفك عبر الرمز المرسل</li>
+                        </ol>
+                        <p>بعد التسجيل، ستحتاج إلى تفعيل حسابك عبر تقديم الوثائق المطلوبة.</p>
+                    </div>
+                </div>
+
+                <!-- Catégorie: Investissement -->
+                <div class="faq-item" data-category="investment">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>ما هو الحد الأدنى للاستثمار؟</h3>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>الحد الأدنى للاستثمار في منصة RIM-FINANCE هو 1,000 أوقية موريتانية فقط. هذا المبلغ المنخفض يتيح لجميع فئات المجتمع المشاركة في الاستثمار الجماعي.</p>
+                        <p>يمكنك زيادة استثمارك في أي وقت، والحد الأقصى للاستثمار الواحد هو 1,000,000 أوقية موريتانية.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="investment">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>كيف أختار المشروع المناسب للاستثمار؟</h3>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>لاختيار المشروع المناسب، ننصحك بمراعاة العوامل التالية:</p>
+                        <ul>
+                            <li><strong>دراسة الجدوى:</strong> اقرأ خطة العمل والتوقعات المالية بعناية</li>
+                            <li><strong>فريق المشروع:</strong> تعرف على خبرات وسجل أصحاب المشروع</li>
+                            <li><strong>القطاع:</strong> استثمر في القطاعات التي تفهمها</li>
+                            <li><strong>المخاطر:</strong> قيم مستوى المخاطر مقابل العوائد المتوقعة</li>
+                            <li><strong>التنويع:</strong> وزع استثماراتك على عدة مشاريع</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="investment">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>ما هي العوائد المتوقعة؟</h3>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>العوائد تختلف حسب نوع المشروع ومستوى المخاطر:</p>
+                        <ul>
+                            <li><strong>المشاريع منخفضة المخاطر:</strong> 8-12% سنوياً</li>
+                            <li><strong>المشاريع متوسطة المخاطر:</strong> 12-18% سنوياً</li>
+                            <li><strong>المشاريع عالية المخاطر:</strong> 18-25% سنوياً</li>
+                        </ul>
+                        <p><strong>تنبيه:</strong> هذه توقعات وليست ضمانات. قد تحقق عوائد أقل أو تفقد جزءاً من استثمارك.</p>
+                    </div>
+                </div>
+
+                <!-- Catégorie: Paiement -->
+                <div class="faq-item" data-category="payment">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>ما هي طرق الدفع المتاحة؟</h3>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>نوفر عدة طرق دفع آمنة ومريحة:</p>
+                        <ul>
+                            <li><strong>البطاقات البنكية:</strong> Visa, Mastercard, American Express</li>
+                            <li><strong>التحويل البنكي:</strong> من جميع البنوك الموريتانية</li>
+                            <li><strong>المحافظ الإلكترونية:</strong> Masrvi, Amanty, Sedad</li>
+                            <li><strong>الدفع النقدي:</strong> في مكاتبنا المعتمدة</li>
+                        </ul>
+                        <p>جميع المعاملات مشفرة ومحمية بأعلى معايير الأمان.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="payment">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>هل توجد رسوم على المعاملات؟</h3>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>نعم، نتقاضى رسوم معالجة بسيطة لتغطية تكاليف التشغيل:</p>
+                        <ul>
+                            <li><strong>رسوم الاستثمار:</strong> 2.5% من قيمة الاستثمار</li>
+                            <li><strong>رسوم السحب:</strong> 1% من المبلغ المسحوب (حد أدنى 500 أ.م.)</li>
+                            <li><strong>رسوم إنشاء المشروع:</strong> 5% من إجمالي التمويل المطلوب</li>
+                        </ul>
+                        <p>هذه الرسوم تساعدنا في توفير خدمة عالية الجودة وحماية أموالكم.</p>
+                    </div>
+                </div>
+
+                <!-- Catégorie: Sécurité -->
+                <div class="faq-item" data-category="security">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>كيف تحمون أموالي واستثماراتي؟</h3>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>نطبق أعلى معايير الأمان لحماية أموالكم:</p>
+                        <ul>
+                            <li><strong>التشفير:</strong> تشفير SSL 256-bit لجميع البيانات</li>
+                            <li><strong>الفصل:</strong> أموال المستثمرين منفصلة عن أموال الشركة</li>
+                            <li><strong>التأمين:</strong> تأمين شامل على جميع الودائع</li>
+                            <li><strong>المراقبة:</strong> مراقبة مستمرة للمعاملات المشبوهة</li>
+                            <li><strong>التدقيق:</strong> تدقيق دوري من جهات خارجية معتمدة</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="security">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>ماذا لو تعرض حسابي للاختراق؟</h3>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>في حالة الاشتباه في اختراق حسابك:</p>
+                        <ol>
+                            <li>اتصل بفريق الدعم فوراً على 44508860</li>
+                            <li>غير كلمة المرور من جهاز آمن</li>
+                            <li>راجع سجل المعاملات للتأكد من عدم وجود عمليات مشبوهة</li>
+                            <li>فعل المصادقة الثنائية لحماية إضافية</li>
+                        </ol>
+                        <p>نضمن تعويض أي خسائر ناتجة عن اختراق أمني من جانبنا.</p>
+                    </div>
+                </div>
+
+                <!-- Catégorie: Légal -->
+                <div class="faq-item" data-category="legal">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>هل منصة RIM-FINANCE مرخصة ومنظمة؟</h3>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>نعم، منصة RIM-FINANCE مرخصة ومنظمة بالكامل:</p>
+                        <ul>
+                            <li><strong>البنك المركزي الموريتاني:</strong> ترخيص خدمات الدفع الإلكتروني</li>
+                            <li><strong>وزارة التجارة:</strong> تسجيل تجاري ساري المفعول</li>
+                            <li><strong>هيئة الأسواق المالية:</strong> ترخيص الوساطة المالية</li>
+                            <li><strong>وزارة العدل:</strong> امتثال لقوانين مكافحة غسل الأموال</li>
+                        </ul>
+                        <p>نلتزم بجميع القوانين واللوائح المحلية والدولية.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="legal">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>ما هي حقوقي كمستثمر؟</h3>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>كمستثمر في منصة RIM-FINANCE، لديك الحقوق التالية:</p>
+                        <ul>
+                            <li><strong>الشفافية:</strong> الحصول على جميع المعلومات المتعلقة بالمشروع</li>
+                            <li><strong>التقارير:</strong> تقارير دورية عن أداء استثماراتك</li>
+                            <li><strong>السحب:</strong> سحب أموالك وفقاً للشروط المتفق عليها</li>
+                            <li><strong>الحماية:</strong> حماية قانونية في حالة النزاعات</li>
+                            <li><strong>التصويت:</strong> المشاركة في قرارات مهمة تخص المشروع</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Catégorie: Plateforme -->
+                <div class="faq-item" data-category="platform">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>كيف يمكنني تتبع استثماراتي؟</h3>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>يمكنك تتبع استثماراتك بسهولة من خلال:</p>
+                        <ul>
+                            <li><strong>لوحة التحكم:</strong> عرض شامل لجميع استثماراتك</li>
+                            <li><strong>التقارير الشهرية:</strong> تقارير مفصلة عن الأداء</li>
+                            <li><strong>الإشعارات:</strong> تنبيهات فورية عن التحديثات المهمة</li>
+                            <li><strong>التطبيق المحمول:</strong> متابعة استثماراتك أينما كنت</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section d'aide supplémentaire -->
+            <div class="help-section">
+                <div class="help-card">
+                    <div class="help-icon">💬</div>
+                    <h3>لم تجد إجابة لسؤالك؟</h3>
+                    <p>فريق الدعم متاح لمساعدتك على مدار الساعة</p>
+                    <div class="help-actions">
+                        <button class="btn btn-primary" onclick="navigateTo('contact')">
+                            <span>📞</span>
+                            اتصل بنا
+                        </button>
+                        <button class="btn btn-secondary" onclick="openLiveChat()">
+                            <span>💬</span>
+                            دردشة مباشرة
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Navigation inférieure -->
+    <nav class="bottom-nav">
+        <a href="/" class="bottom-nav-item">
+            <span>🏠</span>
+            <span data-translate="home">الرئيسية</span>
+        </a>
+        <a href="projects" class="bottom-nav-item">
+            <span>🔍</span>
+            <span data-translate="search">البحث</span>
+        </a>
+        <a href="contribute" class="bottom-nav-item">
+            <span>➕</span>
+            <span data-translate="contribute">المساهمة</span>
+        </a>
+        <a href="notifications" class="bottom-nav-item">
+            <span>🔔</span>
+            <span data-translate="notifications">الإشعارات</span>
+        </a>
+        <a href="profile" class="bottom-nav-item">
+            <span>👤</span>
+            <span data-translate="profile">الملف الشخصي</span>
+        </a>
+    </nav>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/faq.js"></script>
+</body>
+</html>
+

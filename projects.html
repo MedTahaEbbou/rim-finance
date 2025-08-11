@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المشاريع - RIM-FINANCE</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/projects.css">
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+</head>
+<body dir="rtl" class="no-select">
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-content">
+            <a href="/" class="logo">
+                <img src="assets/logo.png" alt="RIM-FINANCE" width="32" height="32">
+                RIM-FINANCE
+            </a>
+            
+            <div class="navbar-actions">
+                <!-- Sélecteur de langue -->
+                <div class="language-selector">
+                    <div class="nav-icon" onclick="toggleLanguageMenu()">
+                        <span>🌐</span>
+                    </div>
+                    <div id="language-menu" class="language-menu">
+                        <div class="language-option" onclick="changeLanguage('ar')">
+                            <span class="flag">🇲🇷</span>
+                            <span>العربية</span>
+                        </div>
+                        <div class="language-option" onclick="changeLanguage('fr')">
+                            <span class="flag">🇫🇷</span>
+                            <span>Français</span>
+                        </div>
+                        <div class="language-option" onclick="changeLanguage('en')">
+                            <span class="flag">🇺🇸</span>
+                            <span>English</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Notifications -->
+                <div class="nav-icon" onclick="navigateTo('notifications')">
+                    <span>🔔</span>
+                    <div class="notification-badge">3</div>
+                </div>
+                
+                <!-- Menu drawer -->
+                <div class="nav-icon" onclick="toggleDrawer()">
+                    <span>☰</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Drawer -->
+    <div id="drawer-overlay" class="drawer-overlay" onclick="closeDrawer()"></div>
+    <div id="drawer" class="drawer">
+        <div class="drawer-header">
+            <div class="logo">RIM-FINANCE</div>
+            <button class="drawer-close" onclick="closeDrawer()">×</button>
+        </div>
+        <div class="drawer-menu">
+            <a href="/" class="drawer-item">
+                <span>🏠</span>
+                <span data-translate="home">الرئيسية</span>
+            </a>
+            <a href="profile" class="drawer-item">
+                <span>👤</span>
+                <span data-translate="profile">الملف الشخصي</span>
+            </a>
+            <a href="my-contributions" class="drawer-item">
+                <span>💰</span>
+                <span data-translate="my_contributions">مساهماتي</span>
+            </a>
+            <a href="manage-projects" class="drawer-item">
+                <span>📊</span>
+                <span data-translate="manage_projects">إدارة المشاريع</span>
+            </a>
+            <a href="savings-offers" class="drawer-item">
+                <span>🏦</span>
+                <span data-translate="savings_offers">عروض الادخار</span>
+            </a>
+            <a href="faq" class="drawer-item">
+                <span>❓</span>
+                <span data-translate="faq">الأسئلة الشائعة</span>
+            </a>
+            <a href="contact" class="drawer-item">
+                <span>📞</span>
+                <span data-translate="contact">اتصل بنا</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Contenu principal -->
+    <main class="projects-main">
+        <div class="container">
+            <!-- En-tête de la page -->
+            <div class="projects-header">
+                <h1 class="page-title">جميع المشاريع</h1>
+                <p class="page-subtitle">اكتشف المشاريع الواعدة واستثمر في المستقبل</p>
+            </div>
+
+            <!-- Barre de recherche et filtres -->
+            <div class="search-filters">
+                <div class="search-bar">
+                    <input type="text" id="search-input" placeholder="ابحث عن المشاريع..." class="search-input">
+                    <button class="search-btn">
+                        <span>🔍</span>
+                    </button>
+                </div>
+
+                <div class="filters">
+                    <div class="filter-group">
+                        <label for="category-filter" class="filter-label">الفئة</label>
+                        <select id="category-filter" class="filter-select">
+                            <option value="">جميع الفئات</option>
+                            <option value="technology">التكنولوجيا</option>
+                            <option value="agriculture">الزراعة</option>
+                            <option value="energy">الطاقة</option>
+                            <option value="education">التعليم</option>
+                            <option value="crafts">الصناعات التقليدية</option>
+                            <option value="commerce">التجارة</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="status-filter" class="filter-label">الحالة</label>
+                        <select id="status-filter" class="filter-select">
+                            <option value="">جميع الحالات</option>
+                            <option value="open">مفتوح</option>
+                            <option value="funded">مكتمل التمويل</option>
+                            <option value="closed">مغلق</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="sort-filter" class="filter-label">ترتيب حسب</label>
+                        <select id="sort-filter" class="filter-select">
+                            <option value="newest">الأحدث</option>
+                            <option value="oldest">الأقدم</option>
+                            <option value="most-funded">الأكثر تمويلاً</option>
+                            <option value="ending-soon">ينتهي قريباً</option>
+                        </select>
+                    </div>
+
+                    <button class="filter-toggle" onclick="toggleAdvancedFilters()">
+                        <span>⚙️</span>
+                        فلاتر متقدمة
+                    </button>
+                </div>
+
+                <!-- Filtres avancés -->
+                <div id="advanced-filters" class="advanced-filters">
+                    <div class="filter-row">
+                        <div class="filter-group">
+                            <label for="min-amount" class="filter-label">الحد الأدنى للمبلغ</label>
+                            <input type="number" id="min-amount" class="filter-input" placeholder="0">
+                        </div>
+                        <div class="filter-group">
+                            <label for="max-amount" class="filter-label">الحد الأقصى للمبلغ</label>
+                            <input type="number" id="max-amount" class="filter-input" placeholder="1000000">
+                        </div>
+                        <div class="filter-group">
+                            <label for="region-filter" class="filter-label">المنطقة</label>
+                            <select id="region-filter" class="filter-select">
+                                <option value="">جميع المناطق</option>
+                                <option value="nouakchott">نواكشوط</option>
+                                <option value="nouadhibou">نواذيبو</option>
+                                <option value="rosso">روصو</option>
+                                <option value="kaedi">كيهيدي</option>
+                                <option value="atar">أطار</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statistiques -->
+            <div class="projects-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">📊</div>
+                    <div class="stat-content">
+                        <div class="stat-number" id="total-projects">24</div>
+                        <div class="stat-label">إجمالي المشاريع</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">💰</div>
+                    <div class="stat-content">
+                        <div class="stat-number" id="total-funded">12.5M</div>
+                        <div class="stat-label">إجمالي التمويل</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-content">
+                        <div class="stat-number" id="total-investors">1,247</div>
+                        <div class="stat-label">المستثمرين</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">✅</div>
+                    <div class="stat-content">
+                        <div class="stat-number" id="success-rate">87%</div>
+                        <div class="stat-label">معدل النجاح</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Résultats de recherche -->
+            <div class="search-results">
+                <div class="results-header">
+                    <span id="results-count">عرض 24 مشروع</span>
+                    <div class="view-toggle">
+                        <button class="view-btn active" onclick="setView('grid')" title="عرض شبكي">
+                            <span>⊞</span>
+                        </button>
+                        <button class="view-btn" onclick="setView('list')" title="عرض قائمة">
+                            <span>☰</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Grille des projets -->
+                <div id="projects-container" class="projects-grid">
+                    <!-- Les projets seront chargés dynamiquement -->
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination">
+                    <button class="pagination-btn" onclick="changePage('prev')" disabled>
+                        <span>‹</span>
+                        السابق
+                    </button>
+                    <div class="pagination-numbers">
+                        <button class="pagination-number active">1</button>
+                        <button class="pagination-number">2</button>
+                        <button class="pagination-number">3</button>
+                        <span class="pagination-dots">...</span>
+                        <button class="pagination-number">8</button>
+                    </div>
+                    <button class="pagination-btn" onclick="changePage('next')">
+                        التالي
+                        <span>›</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Navigation inférieure -->
+    <nav class="bottom-nav">
+        <a href="/" class="bottom-nav-item">
+            <span>🏠</span>
+            <span data-translate="home">الرئيسية</span>
+        </a>
+        <a href="projects" class="bottom-nav-item active">
+            <span>🔍</span>
+            <span data-translate="search">البحث</span>
+        </a>
+        <a href="contribute" class="bottom-nav-item">
+            <span>➕</span>
+            <span data-translate="contribute">المساهمة</span>
+        </a>
+        <a href="notifications" class="bottom-nav-item">
+            <span>🔔</span>
+            <span data-translate="notifications">الإشعارات</span>
+        </a>
+        <a href="profile" class="bottom-nav-item">
+            <span>👤</span>
+            <span data-translate="profile">الملف الشخصي</span>
+        </a>
+    </nav>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/projects.js"></script>
+</body>
+</html>
+

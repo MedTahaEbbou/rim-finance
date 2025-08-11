@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>التسجيل - RIM-FINANCE</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+</head>
+<body dir="rtl" class="no-select">
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-content">
+            <a href="/" class="logo">
+                <img src="assets/logo.png" alt="RIM-FINANCE" width="32" height="32">
+                RIM-FINANCE
+            </a>
+            
+            <div class="navbar-actions">
+                <!-- Sélecteur de langue -->
+                <div class="language-selector">
+                    <div class="nav-icon" onclick="toggleLanguageMenu()">
+                        <span>🌐</span>
+                    </div>
+                    <div id="language-menu" class="language-menu">
+                        <div class="language-option" onclick="changeLanguage('ar')">
+                            <span class="flag">🇲🇷</span>
+                            <span>العربية</span>
+                        </div>
+                        <div class="language-option" onclick="changeLanguage('fr')">
+                            <span class="flag">🇫🇷</span>
+                            <span>Français</span>
+                        </div>
+                        <div class="language-option" onclick="changeLanguage('en')">
+                            <span class="flag">🇺🇸</span>
+                            <span>English</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Menu drawer -->
+                <div class="nav-icon" onclick="toggleDrawer()">
+                    <span>☰</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Drawer -->
+    <div id="drawer-overlay" class="drawer-overlay" onclick="closeDrawer()"></div>
+    <div id="drawer" class="drawer">
+        <div class="drawer-header">
+            <div class="logo">RIM-FINANCE</div>
+            <button class="drawer-close" onclick="closeDrawer()">×</button>
+        </div>
+        <div class="drawer-menu">
+            <a href="/" class="drawer-item">
+                <span>🏠</span>
+                <span data-translate="home">الرئيسية</span>
+            </a>
+            <a href="projects" class="drawer-item">
+                <span>🔍</span>
+                <span data-translate="search">البحث</span>
+            </a>
+            <a href="faq" class="drawer-item">
+                <span>❓</span>
+                <span data-translate="faq">الأسئلة الشائعة</span>
+            </a>
+            <a href="contact" class="drawer-item">
+                <span>📞</span>
+                <span data-translate="contact">اتصل بنا</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Contenu principal -->
+    <main class="auth-main">
+        <div class="auth-container">
+            <div class="auth-card">
+                <div class="auth-header">
+                    <h1 class="auth-title" data-translate="signup">التسجيل</h1>
+                    <p class="auth-subtitle">انضم إلى منصة التمويل الجماعي الرائدة</p>
+                </div>
+
+                <!-- Onglets -->
+                <div class="auth-tabs">
+                    <button class="auth-tab active" onclick="switchTab('signup')" data-translate="signup">
+                        التسجيل
+                    </button>
+                    <button class="auth-tab" onclick="switchTab('login')" data-translate="login">
+                        تسجيل الدخول
+                    </button>
+                </div>
+
+                <!-- Formulaire d'inscription -->
+                <form id="signup-form" class="auth-form">
+                    <div class="form-group">
+                        <label for="user-type" class="form-label">نوع الحساب</label>
+                        <div class="user-type-selector">
+                            <div class="user-type-option active" onclick="selectUserType('investor')">
+                                <div class="user-type-icon">💰</div>
+                                <div class="user-type-text">
+                                    <h3 data-translate="investor">مستثمر</h3>
+                                    <p>أريد الاستثمار في المشاريع</p>
+                                </div>
+                            </div>
+                            <div class="user-type-option" onclick="selectUserType('owner')">
+                                <div class="user-type-icon">🚀</div>
+                                <div class="user-type-text">
+                                    <h3 data-translate="project_owner">صاحب مشروع</h3>
+                                    <p>أريد تمويل مشروعي</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="full-name" class="form-label" data-translate="full_name">الاسم الكامل</label>
+                        <input type="text" id="full-name" class="form-input" data-translate-placeholder="full_name" placeholder="الاسم الكامل" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone" class="form-label" data-translate="phone_number">رقم الهاتف</label>
+                        <input type="tel" id="phone" class="form-input" data-translate-placeholder="phone_number" placeholder="رقم الهاتف" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password" class="form-label" data-translate="password">كلمة المرور</label>
+                        <input type="password" id="password" class="form-input" data-translate-placeholder="password" placeholder="كلمة المرور" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirm-password" class="form-label" data-translate="confirm_password">تأكيد كلمة المرور</label>
+                        <input type="password" id="confirm-password" class="form-input" data-translate-placeholder="confirm_password" placeholder="تأكيد كلمة المرور" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" required>
+                            <span class="checkmark"></span>
+                            أوافق على <a href="terms" class="link">الشروط والأحكام</a>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-full">
+                        <span data-translate="signup">التسجيل</span>
+                    </button>
+                </form>
+
+                <!-- Formulaire de connexion -->
+                <form id="login-form" class="auth-form" style="display: none;">
+                    <div class="form-group">
+                        <label for="login-phone" class="form-label" data-translate="phone_number">رقم الهاتف</label>
+                        <input type="tel" id="login-phone" class="form-input" data-translate-placeholder="phone_number" placeholder="رقم الهاتف" value="44508860" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="login-password" class="form-label" data-translate="password">كلمة المرور</label>
+                        <input type="password" id="login-password" class="form-input" data-translate-placeholder="password" placeholder="كلمة المرور" value="123456" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
+                            تذكرني
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-full">
+                        <span data-translate="login">تسجيل الدخول</span>
+                    </button>
+
+                    <div class="auth-footer">
+                        <a href="#" class="link">نسيت كلمة المرور؟</a>
+                    </div>
+                </form>
+
+                <div class="auth-divider">
+                    <span>أو</span>
+                </div>
+
+                <div class="social-login">
+                    <button class="btn btn-secondary btn-full">
+                        <span>📱</span>
+                        تسجيل الدخول بالهاتف
+                    </button>
+                </div>
+
+                <div class="auth-switch">
+                    <span id="auth-switch-text">لديك حساب بالفعل؟</span>
+                    <a href="#" id="auth-switch-link" onclick="switchTab('login')" class="link">تسجيل الدخول</a>
+                </div>
+            </div>
+
+            <div class="auth-image">
+                <img src="assets/hero-image.jpg" alt="RIM-FINANCE" class="no-select">
+                <div class="auth-image-overlay">
+                    <h2>انضم إلى آلاف المستثمرين</h2>
+                    <p>ساهم في نمو الاقتصاد الموريتاني من خلال الاستثمار في المشاريع الواعدة</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>
+

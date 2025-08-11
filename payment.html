@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الدفع - RIM-FINANCE</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/payment.css">
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+</head>
+<body dir="rtl" class="no-select">
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-content">
+            <a href="/" class="logo">
+                <img src="assets/logo.png" alt="RIM-FINANCE" width="32" height="32">
+                RIM-FINANCE
+            </a>
+            
+            <div class="navbar-actions">
+                <!-- Sélecteur de langue -->
+                <div class="language-selector">
+                    <div class="nav-icon" onclick="toggleLanguageMenu()">
+                        <span>🌐</span>
+                    </div>
+                    <div id="language-menu" class="language-menu">
+                        <div class="language-option" onclick="changeLanguage('ar')">
+                            <span class="flag">🇲🇷</span>
+                            <span>العربية</span>
+                        </div>
+                        <div class="language-option" onclick="changeLanguage('fr')">
+                            <span class="flag">🇫🇷</span>
+                            <span>Français</span>
+                        </div>
+                        <div class="language-option" onclick="changeLanguage('en')">
+                            <span class="flag">🇺🇸</span>
+                            <span>English</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Retour -->
+                <div class="nav-icon" onclick="history.back()">
+                    <span>←</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenu principal -->
+    <main class="payment-main">
+        <div class="container">
+            <!-- En-tête de paiement -->
+            <div class="payment-header">
+                <h1 class="page-title">تمويل المشروع</h1>
+                <div class="security-badge">
+                    <span>🔒</span>
+                    <span>دفع آمن ومشفر</span>
+                </div>
+            </div>
+
+            <div class="payment-container">
+                <!-- Résumé du projet -->
+                <div class="project-summary">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="assets/project1.jpg" alt="Project" class="no-select">
+                            <div class="project-status open">مفتوح</div>
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-title">مشروع الطاقة الشمسية</h3>
+                            <p class="project-description">تركيب ألواح شمسية لتوفير الكهرباء للمناطق النائية</p>
+                            
+                            <div class="project-progress">
+                                <div class="progress-info">
+                                    <span class="funded">350,000 أ.م.</span>
+                                    <span class="goal">من أصل 500,000 أ.م.</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 70%"></div>
+                                </div>
+                                <div class="progress-details">
+                                    <span>125 مساهم</span>
+                                    <span>15 يوم متبقي</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Formulaire de paiement -->
+                <div class="payment-form-container">
+                    <form id="payment-form" class="payment-form">
+                        <!-- Montant de l'investissement -->
+                        <div class="form-section">
+                            <h3 class="section-title">مبلغ الاستثمار</h3>
+                            
+                            <div class="amount-selector">
+                                <div class="preset-amounts">
+                                    <button type="button" class="amount-btn" onclick="selectAmount(10000)">10,000 أ.م.</button>
+                                    <button type="button" class="amount-btn" onclick="selectAmount(25000)">25,000 أ.م.</button>
+                                    <button type="button" class="amount-btn" onclick="selectAmount(50000)">50,000 أ.م.</button>
+                                    <button type="button" class="amount-btn" onclick="selectAmount(100000)">100,000 أ.م.</button>
+                                </div>
+                                
+                                <div class="custom-amount">
+                                    <label for="amount-input" class="form-label">مبلغ مخصص</label>
+                                    <div class="amount-input-group">
+                                        <input type="number" id="amount-input" class="form-input" placeholder="أدخل المبلغ" min="1000" max="1000000">
+                                        <span class="currency-label">أ.م.</span>
+                                    </div>
+                                    <div class="amount-limits">
+                                        <span>الحد الأدنى: 1,000 أ.م.</span>
+                                        <span>الحد الأقصى: 1,000,000 أ.م.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Méthodes de paiement -->
+                        <div class="form-section">
+                            <h3 class="section-title">طريقة الدفع</h3>
+                            
+                            <div class="payment-methods">
+                                <div class="payment-method active" onclick="selectPaymentMethod('card')">
+                                    <div class="method-icon">💳</div>
+                                    <div class="method-info">
+                                        <h4>بطاقة ائتمان/خصم</h4>
+                                        <p>Visa, Mastercard, American Express</p>
+                                    </div>
+                                    <div class="method-radio">
+                                        <input type="radio" name="payment-method" value="card" checked>
+                                        <span class="radio-mark"></span>
+                                    </div>
+                                </div>
+                                
+                                <div class="payment-method" onclick="selectPaymentMethod('bank')">
+                                    <div class="method-icon">🏦</div>
+                                    <div class="method-info">
+                                        <h4>تحويل بنكي</h4>
+                                        <p>تحويل مباشر من حسابك البنكي</p>
+                                    </div>
+                                    <div class="method-radio">
+                                        <input type="radio" name="payment-method" value="bank">
+                                        <span class="radio-mark"></span>
+                                    </div>
+                                </div>
+                                
+                                <div class="payment-method" onclick="selectPaymentMethod('mobile')">
+                                    <div class="method-icon">📱</div>
+                                    <div class="method-info">
+                                        <h4>محفظة إلكترونية</h4>
+                                        <p>Masrvi, Amanty, Sedad</p>
+                                    </div>
+                                    <div class="method-radio">
+                                        <input type="radio" name="payment-method" value="mobile">
+                                        <span class="radio-mark"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Détails de la carte -->
+                        <div id="card-details" class="form-section">
+                            <h3 class="section-title">تفاصيل البطاقة</h3>
+                            
+                            <div class="card-form">
+                                <div class="form-group">
+                                    <label for="card-number" class="form-label">رقم البطاقة</label>
+                                    <input type="text" id="card-number" class="form-input" placeholder="1234 5678 9012 3456" maxlength="19">
+                                    <div class="card-icons">
+                                        <span class="card-icon visa">💳</span>
+                                        <span class="card-icon mastercard">💳</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="expiry-date" class="form-label">تاريخ الانتهاء</label>
+                                        <input type="text" id="expiry-date" class="form-input" placeholder="MM/YY" maxlength="5">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="cvv" class="form-label">CVV</label>
+                                        <input type="text" id="cvv" class="form-input" placeholder="123" maxlength="4">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="cardholder-name" class="form-label">اسم حامل البطاقة</label>
+                                    <input type="text" id="cardholder-name" class="form-input" placeholder="الاسم كما يظهر على البطاقة">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Détails du transfert bancaire -->
+                        <div id="bank-details" class="form-section" style="display: none;">
+                            <h3 class="section-title">تفاصيل التحويل البنكي</h3>
+                            
+                            <div class="bank-info">
+                                <div class="info-card">
+                                    <h4>معلومات الحساب</h4>
+                                    <div class="bank-details-list">
+                                        <div class="detail-item">
+                                            <span class="label">اسم البنك:</span>
+                                            <span class="value">البنك الوطني الموريتاني</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <span class="label">رقم الحساب:</span>
+                                            <span class="value">1234567890123456</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <span class="label">اسم المستفيد:</span>
+                                            <span class="value">RIM-FINANCE SARL</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <span class="label">رمز التحويل:</span>
+                                            <span class="value" id="transfer-code">RF-2024-001234</span>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-secondary" onclick="copyBankDetails()">
+                                        <span>📋</span>
+                                        نسخ التفاصيل
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Détails de la portefeuille électronique -->
+                        <div id="mobile-details" class="form-section" style="display: none;">
+                            <h3 class="section-title">المحفظة الإلكترونية</h3>
+                            
+                            <div class="mobile-wallets">
+                                <div class="wallet-option" onclick="selectWallet('masrvi')">
+                                    <div class="wallet-icon">📱</div>
+                                    <div class="wallet-name">Masrvi</div>
+                                </div>
+                                <div class="wallet-option" onclick="selectWallet('amanty')">
+                                    <div class="wallet-icon">💰</div>
+                                    <div class="wallet-name">Amanty</div>
+                                </div>
+                                <div class="wallet-option" onclick="selectWallet('sedad')">
+                                    <div class="wallet-icon">💳</div>
+                                    <div class="wallet-name">Sedad</div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone-number" class="form-label">رقم الهاتف</label>
+                                <input type="tel" id="phone-number" class="form-input" placeholder="44508860">
+                            </div>
+                        </div>
+
+                        <!-- Résumé de la commande -->
+                        <div class="form-section">
+                            <h3 class="section-title">ملخص العملية</h3>
+                            
+                            <div class="order-summary">
+                                <div class="summary-item">
+                                    <span class="label">مبلغ الاستثمار:</span>
+                                    <span class="value" id="investment-amount">0 أ.م.</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="label">رسوم المعالجة:</span>
+                                    <span class="value" id="processing-fee">0 أ.م.</span>
+                                </div>
+                                <div class="summary-divider"></div>
+                                <div class="summary-item total">
+                                    <span class="label">المجموع:</span>
+                                    <span class="value" id="total-amount">0 أ.م.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Conditions -->
+                        <div class="form-section">
+                            <div class="terms-section">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="terms-checkbox" required>
+                                    <span class="checkmark"></span>
+                                    أوافق على <a href="terms" class="link">الشروط والأحكام</a> و <a href="privacy" class="link">سياسة الخصوصية</a>
+                                </label>
+                                
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="risk-checkbox" required>
+                                    <span class="checkmark"></span>
+                                    أفهم أن الاستثمار ينطوي على مخاطر وقد أفقد جزءاً أو كامل استثماري
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Bouton de paiement -->
+                        <div class="form-section">
+                            <button type="submit" class="btn btn-primary btn-payment" disabled>
+                                <span class="btn-icon">🔒</span>
+                                <span class="btn-text">تأكيد الدفع</span>
+                                <span class="btn-amount" id="btn-amount">0 أ.م.</span>
+                            </button>
+                            
+                            <div class="payment-security">
+                                <div class="security-item">
+                                    <span>🔒</span>
+                                    <span>تشفير SSL 256-bit</span>
+                                </div>
+                                <div class="security-item">
+                                    <span>🛡️</span>
+                                    <span>حماية PCI DSS</span>
+                                </div>
+                                <div class="security-item">
+                                    <span>✅</span>
+                                    <span>معتمد من البنك المركزي</span>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal de confirmation -->
+    <div id="payment-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>تأكيد الدفع</h3>
+                <button class="modal-close" onclick="closePaymentModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="confirmation-icon">✅</div>
+                <h4>تم الدفع بنجاح!</h4>
+                <p>تم تسجيل استثمارك في مشروع الطاقة الشمسية بنجاح</p>
+                <div class="payment-details">
+                    <div class="detail-row">
+                        <span>المبلغ:</span>
+                        <span id="confirmed-amount">50,000 أ.م.</span>
+                    </div>
+                    <div class="detail-row">
+                        <span>رقم العملية:</span>
+                        <span id="transaction-id">TXN-2024-001234</span>
+                    </div>
+                    <div class="detail-row">
+                        <span>التاريخ:</span>
+                        <span id="payment-date">11 أغسطس 2024</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" onclick="goToProfile()">عرض استثماراتي</button>
+                <button class="btn btn-secondary" onclick="goToProject()">عودة للمشروع</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/payment.js"></script>
+</body>
+</html>
+
